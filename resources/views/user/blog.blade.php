@@ -1,24 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head> 
-      @include('user.layouts.head') 
-  </head>
+@extends('user.app')
 
-  <body>
+@section('bg-img', asset('user/img/home-bg.jpg'))  {{-- banner img --}}    
+@section('banner-title', 'Clean Blog')  {{-- banner img --}}    
+@section('banner-subtitle', 'A Blog Theme by Start Bootstrap')  {{-- banner img --}}    
 
-   @include('user/layouts/header') 
-
-    <!-- Main Content -->
-    <div class="container">
+@section('main-content') 
+<!-- Main Content -->
+    <div class="container"> 
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto"> 
           <div class="post-preview">
-            <a href="post.html"> 
-              <h2 class="post-title">
+            <a href="{{ route('post') }}">  {{-- route('post') --}} 
+              <h2 class="post-title">  
                 Man must explore, and this is exploration at its greatest
               </h2>
               <h3 class="post-subtitle">
-                Problems look mighty small from 150 miles up
+                Problems look mighty small from 150 miles up 
               </h3>
             </a>
             <p class="post-meta">Posted by
@@ -73,9 +70,5 @@
       </div>
     </div>
 
-    <hr>
-
-    @include('user.layouts.footer')
-  </body> 
-
-</html>
+    <hr> 
+@endsection  
