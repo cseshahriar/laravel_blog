@@ -1,0 +1,2 @@
+ <!-- cool way -->
+    ctrl + d , shift + ctrl + right arrow , shift  + alt + left arrow, shift + left arrow, shift + {{}}, shift + 9 for )()
