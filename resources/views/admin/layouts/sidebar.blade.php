@@ -29,22 +29,22 @@
       <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Blog Dashboard</li>
             <li class=""> {{-- active --}}
-                <a href="index.html">
+                <a href="{{ route('post.index') }}">
                     <i class="fa fa-file"></i> Posts
                 </a>
             </li> 
             <li class="">
-                <a href="index.html">
-                    <i class="fa fa-list"></i> Categories
+                <a href="{{ route('category.index') }}">
+                    <i class="fa fa-list"></i> Categories 
                 </a>
             </li>
             <li class=""> 
-                <a href="index.html">
+                <a href="{{ route('tag.index') }}"> 
                     <i class="fa fa-list"></i> Tags
                 </a>
             </li> 
             <li class=""> 
-                <a href="index.html">
+                <a href="{{ route('user.index') }}">      
                     <i class="fa fa-users"></i> Users
                 </a>
             </li> 
