@@ -1,5 +1,10 @@
 @extends('admin.layouts.app')
-@section('main-content')
+
+@section('extracss') 
+ <link rel="stylesheet" href="{{ asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> 
+@endsection
+
+@section('main-content') 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -16,31 +21,72 @@
     </section>
     <!-- Main content -->
     <section class="content">
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Title</h3>
+       <div class="box">
+                  <div class="box-header">
+                    <h3 class="box-title">Tags
+                    </h3>
+                    <span class="pull-right">
+                       <a href="{{ route('tag.create') }}" class="btn btn-success pull-right">Add New</a>
+                    </span>
+                  </div>
+                  <!-- /.box-header -->
+                  <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Tag Name</th>
+                            <th>Slug</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                      </thead>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
+                      <tbody>
+                          @foreach($tags as $tag)
+                            <tr>
+                                <td>{{ $loop->index + 1 }}</td> 
+                                <td>{{ $tag->name }}</td>
+                                <td>{{ $tag->slug }}</td>
+                                <td><i class="fa fa-edit"></i></td>
+                                <td><i class="fa fa-trash"></i></td>
+                            </tr>
+                          @endforeach
+
+                          <tfoot>
+                            <th>S.No</th>
+                            <th>Tag Name</th>
+                            <th>Slug</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                          </tfoot>
+                      
+                    </table>
+                  </div>
+                  <!-- /.box-body -->
         </div>
-        <div class="box-body">
-          Start creating your amazing application!
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
-        <!-- /.box-footer-->
-      </div>
-      <!-- /.box -->
+        <!-- /.box -->
 		</section>
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 @endsection 
+
+@section('extrajs')
+<script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script> 
+<!-- page script -->
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+@endsection

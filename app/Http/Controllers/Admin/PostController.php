@@ -15,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-          return view('admin.post.index'); //bitfumes work admin.post.show
+        $posts = Post::all();
+        return view('admin.post.index', compact('posts')); //bitfumes work admin.post.show
     }
 
     /**

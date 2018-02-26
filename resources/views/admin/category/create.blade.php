@@ -28,20 +28,24 @@
             <!-- /.box-header -->
 			
             <!-- form start -->
-            <form role="form"> 
+            <form role="form" action="{{ route('category.store') }}" method="post"> 
+              {{ csrf_field() }}         
               <div class="box-body">
               	<div class="col-md-6 col-md-offset-3">
-	                <div class="form-group">
+	                <div class="form-group {{  $errors->has('name') ? 'has-error' : '' }}">
 	                  <label for="name">Category Title</label>
-	                  <input type="text" name="name" class="form-control" id="name" placeholder="Enter tag name here">
+	                  <input type="text" name="name" class="form-control" id="name" placeholder="Enter category name here">
+                    <label>{{ $errors->first('name') }}</label>
 	                </div> 
-	                <div class="form-group"> 
+	                <div class="form-group {{  $errors->has('slug') ? 'has-error' : '' }}">   
 	                  <label for="slug">Category Slug</label>
-	                  <input type="text" name="slug" class="form-control" id="slug" placeholder="Enter article slug here">
+	                  <input type="text" name="slug" class="form-control" id="slug" placeholder="Enter category slug here">
+                     <label>{{ $errors->first('slug') }}</label>
 	                </div>
 
 		              <div class="form-group">
 		                <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="{{ route('category.index') }}" class="btn btn-warning">Back</a>
 		              </div>
 	                
               	</div>

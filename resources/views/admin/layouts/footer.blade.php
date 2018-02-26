@@ -2,7 +2,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; <?= date('Y'); ?> <a href="https://adminlte.io">Shahriar Hosen</a>.</strong> All rights
     reserved.
   </footer>
 
@@ -39,6 +39,9 @@
 <script src="{{ asset('admin/bower_components/fastclick/lib/fastclick.js') }}"></script> 
 <!-- AdminLTE App -->
 <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script> 
+
+@section('extrajs')
+@show   
 <script type="text/javascript">
   $('#visualeditor').wysihtml5();  
 </script>
