@@ -75,7 +75,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.post.edit');  
+        $post = Post::find($id);
+        return view('admin.post.edit', compact('post'));  
     }
 
     /**
@@ -87,7 +88,23 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title'     => 'required',
+            'subtitle'  => 'required',
+            'slug'      => 'required',
+            //'image'      => 'required',
+            //'status'      => 'required', 
+            'body'      => 'required',
+        ]);
+
+        $post = Post::find($id);  
+        $post->title = $request->title; 
+        $post->subtitle = $request->subtitle; 
+        $post->slug = $request->slug; 
+        $post->body = $request->body; 
+        $post->save();
+
+        return redirect(route('post.index'));   
     }
 
     /**
@@ -98,6 +115,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect()->back(); //same page  
     }
 }

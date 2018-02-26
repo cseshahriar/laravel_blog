@@ -53,8 +53,24 @@
                                 <td>{{ $post->subtitle}}</td>
                                 <td>{{ $post->slug }}</td>
                                 <td>{{ $post->created_at->format('d-m-Y') }}</td>
-                                <td><i class="fa fa-edit"></i></td>
-                                <td><i class="fa fa-trash"></i></td>
+                                <td>
+                                  <a href="{{ route('post.edit', $post->id) }}" onclick="return confirm('Are you sure, Want to edit this?');">  
+                                    <i class="fa fa-edit"></i></a> 
+                                  </td>
+                                <td>
+                                  <form id="delete-form-{{ $post->id }}" action="{{ route('post.destroy', $post->id) }}" method="post" style="display: none;">  
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                  </form>
+                                  <a href="" onclick="if(confirm('Are you sure, Want to delete this?')) { 
+                                      event.preventDefault(); 
+                                        document.getElementById('delete-form-{{ $post->id }}').submit();
+                                       } else { 
+                                          event.preventDefault(); 
+                                      }">
+                                    <i class="fa fa-trash"></i> 
+                                  </a>
+                                </td>
                             </tr>
                           @endforeach
 
