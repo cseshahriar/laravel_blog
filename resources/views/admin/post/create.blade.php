@@ -28,66 +28,75 @@
             <!-- /.box-header -->
 			
             <!-- form start -->
-            <form role="form"> 
+            <form role="form" action="{{ route('post.store') }}" method="post" enctype="multipart/form-data"> 
+            	{{ csrf_field() }} 
               <div class="box-body">
               	<div class="col-md-6">
-	                <div class="form-group">
+
+	                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
 	                  <label for="title">Article Title</label>
-	                  <input type="text" name="title" class="form-control" id="title" placeholder="Enter article title here">
+	                  <input type="text" name="title" class="form-control" id="title" value="{{ old('title') }}" placeholder="Enter article title here"/>
+	                  <label>{{ $errors->first('title') }}</label>  
 	                </div> 
 
-	                <div class="form-group">
+	                <div class="form-group{{ $errors->has('subtitle') ? ' has-error' : '' }}">
 	                  <label for="subtitle">Article Subtitle</label>
-	                  <input type="text" name="subtitle" class="form-control" id="subtitle" placeholder="Enter article subtitle here">
+	                  <input type="text" name="subtitle" class="form-control" id="subtitle" value="{{ old('subtitle') }}" placeholder="Enter article subtitle here" />
+	                  <label>{{ $errors->first('subtitle') }}</label>
 	                </div>  
 
-	                <div class="form-group">
+	                <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
 	                  <label for="slug">Article Slug</label>
-	                  <input type="text" name="slug" class="form-control" id="slug" placeholder="Enter article slug here">
+	                  <input type="text" name="slug" class="form-control" id="slug" value="{{ old('slug') }}" placeholder="Enter article slug here">
+	                  <label>{{ $errors->first('slug') }}</label>
 	                </div>
               	</div>
 
               	<div class="col-md-6">
 
-	                <div class="form-group">
+	                <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
 	                  <label for="image">Articel Image</label>
 	                  <input type="file" name="image" id="image">
+	                  <label>{{ $errors->first('image') }}</label>
 	                </div>
 
 	                <br>
-	                <div class="checkbox">
+	                <div class="checkbox {{ $errors->has('status') ? 'has-error' : ''  }}">
 	                  <label>
 	                    <input type="checkbox" name="status"> Publish
 	                  </label>
+	                  <br>
+	                  <label>{{ $errors->first('status') }}</label> 
 	                </div> 
 
               	</div>
               </div>
+
                {{-- editor --}}
-		<div class="box">
-		  <div class="box-header">
-		    <h3 class="box-title">Write Articel Body Here
-		      <small>Simple and fast</small>
-		    </h3>
-		    <!-- tools box -->
-		    <div class="pull-right box-tools">
-		      <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip"
-		              title="Collapse">
-		        <i class="fa fa-minus"></i></button>
-		      <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip"
-		              title="Remove">
-		        <i class="fa fa-times"></i></button>
-		    </div>
-		    <!-- /. tools -->
-		  </div>
-		  <!-- /.box-header -->
-		  <div class="box-body pad">
-		    <form>
-		      <textarea class="textarea" name="body" id="visualeditor" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-		    </form>
-		  </div>
-		</div>
-		{{-- editor end  --}}
+				<div class="box">
+				  <div class="box-header">
+				    <h3 class="box-title">Write Articel Body Here
+				      <small>Simple and fast</small>
+				    </h3>
+				    <!-- tools box -->
+				    <div class="pull-right box-tools">
+				      <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip"
+				              title="Collapse">
+				        <i class="fa fa-minus"></i></button>
+				      <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip"
+				              title="Remove">
+				        <i class="fa fa-times"></i></button>
+				    </div>
+				    <!-- /. tools -->
+				  </div>
+				  <!-- /.box-header -->
+				  <div class="box-body pad {{ $errors->has('body') ? 'has-error' : '' }}">
+				      <textarea class="textarea" name="body" id="visualeditor" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('body') }}</textarea>
+				      <label class="text-danger">{{ $errors->first('body') }}</label>
+				  </div>  
+				</div>
+				{{-- editor end  --}}
+
               <!-- /.box-body -->
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
