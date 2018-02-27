@@ -48,8 +48,24 @@
                                 <td>{{ $loop->index + 1 }}</td> 
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->slug }}</td>
-                                <td><i class="fa fa-edit"></i></td>
-                                <td><i class="fa fa-trash"></i></td>
+                                <td>
+                                  <a href="{{ route('category.edit', $category->id) }}" onclick="return confirm('Are you sure, Want to edit this?');">  
+                                    <i class="fa fa-edit"></i></a> 
+                                  </td>
+                                <td>
+                                  <form id="delete-form-{{ $category->id }}" action="{{ route('category.destroy', $category->id) }}" method="post" style="display: none;">  
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                  </form>
+                                  <a href="" onclick="if(confirm('Are you sure, Want to delete this?')) { 
+                                      event.preventDefault(); 
+                                        document.getElementById('delete-form-{{ $category->id }}').submit();
+                                       } else { 
+                                          event.preventDefault();  
+                                      }">
+                                    <i class="fa fa-trash"></i>   
+                                  </a>
+                                </td>
                             </tr>
                           @endforeach
 

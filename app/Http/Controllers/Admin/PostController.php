@@ -76,6 +76,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        //$post = Post::where('id',$id)->first(); 
         return view('admin.post.edit', compact('post'));  
     }
 
@@ -115,6 +116,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        //Post::where('id', $id)->delete();    
+
         $post = Post::find($id);
         $post->delete();
 
