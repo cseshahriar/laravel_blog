@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\user\Post;
+use App\Model\user\Tag;
+use App\Model\user\Category; 
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -26,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.post.create');   
+        $tags = Tag::all();
+        $categories = Category::all(); 
+        return view('admin.post.create', compact('tags', 'categories'));        
     }
 
     /**
@@ -51,9 +55,12 @@ class PostController extends Controller
         $post->subtitle = $request->subtitle; 
         $post->slug = $request->slug; 
         $post->body = $request->body; 
+        $post->status = $request->status;  
         $post->save();
 
-        return redirect(route('post.index'));  
+        $post->tags()->sync($request->tags); 
+        $post->categories()->sync($request->categories);  
+        return redirect(route('post.index'));    
     }
 
     /**
@@ -76,8 +83,12 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+
+        $tags = Tag::all();
+        $categories = Category::all(); 
+
         //$post = Post::where('id',$id)->first(); 
-        return view('admin.post.edit', compact('post'));  
+        return view('admin.post.edit', compact('tags','categories','post'));  
     }
 
     /**
@@ -89,6 +100,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $this->validate($request, [
             'title'     => 'required',
             'subtitle'  => 'required',
@@ -103,9 +115,13 @@ class PostController extends Controller
         $post->subtitle = $request->subtitle; 
         $post->slug = $request->slug; 
         $post->body = $request->body; 
+        $post->status = $request->status;       
         $post->save();
 
-        return redirect(route('post.index'));   
+        $post->tags()->sync($request->tags);
+        $post->categories()->sync($request->categories);   
+
+        return redirect(route('post.index'));    
     }
 
     /**

@@ -1,4 +1,9 @@
 @extends('admin.layouts.app')
+
+@section('extracss')
+ 	<link rel="stylesheet" href="{{ asset('admin/bower_components/select2/dist/css/select2.css') }}"> 
+@endsection
+
 @section('main-content')
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -49,7 +54,15 @@
 	                  <label for="slug">Article Slug</label>
 	                  <input type="text" name="slug" class="form-control" id="slug" value="{{ old('slug') }}" placeholder="Enter article slug here">
 	                  <label>{{ $errors->first('slug') }}</label>
-	                </div>
+	                </div> 
+
+	                 <div class="checkbox {{ $errors->has('status') ? 'has-error' : ''  }}">
+	                  <label>
+	                    <input type="checkbox" name="status" value="1"> Publish
+	                  </label>
+	                  <br>
+	                  <label>{{ $errors->first('status') }}</label>    
+	                </div> 
               	</div>
 
               	<div class="col-md-6">
@@ -59,16 +72,27 @@
 	                  <input type="file" name="image" id="image">
 	                  <label>{{ $errors->first('image') }}</label>
 	                </div>
+	                {{-- Tag --}}
+                  <div class="form-group" style="margin-top: 28px"> 
+                    <label>Select Tag</label> 
+                    <select name="tags[]" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                    	@foreach($tags as $tag)
+                      		<option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    	@endforeach
+                    </select>
+                  </div>
+                 {{-- /tag --}} 
 
-	                <br>
-	                <div class="checkbox {{ $errors->has('status') ? 'has-error' : ''  }}">
-	                  <label>
-	                    <input type="checkbox" name="status"> Publish
-	                  </label>
-	                  <br>
-	                  <label>{{ $errors->first('status') }}</label> 
-	                </div> 
-
+                 {{-- category --}}
+                  <div class="form-group" style="margin-top: 36px">     
+                    <label>Select Category</label> 
+                    <select name="categories[]" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                    	@foreach($categories as $category)
+                      		<option value="{{ $category->id }}">{{ $category->name }}</option>     
+                    	@endforeach
+                    </select>
+                  </div>
+                 {{-- /category --}}
               	</div>
               </div>
 
@@ -114,4 +138,13 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+@endsection
+
+@section('extrajs') 
+<script src="{{ asset('admin/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+<script>
+  $(document).ready(function () {
+    $('.select2').select2();
+  });
+</script>
 @endsection
