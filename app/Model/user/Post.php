@@ -9,7 +9,7 @@ class Post extends Model
     public function tags()
     { 
     	//when need tags from a post  
-    	return $this->belongsToMany('App\Model\user\Tag', 'Post_tags'); //with pivot     
+    	return $this->belongsToMany('App\Model\user\Tag', 'Post_tags')->withTimestamps(); //with pivot     
     	//every post has many tags 
     }  
 
@@ -17,7 +17,7 @@ class Post extends Model
     public function categories()
     { 
     	//when need categories from a post  
-    	return $this->belongsToMany('App\Model\user\Category', 'Category_posts'); //with pivot         
+    	return $this->belongsToMany('App\Model\user\Category', 'Category_posts')->withTimestamps(); //with pivot         
     	//every post has many categories    
     }  
 }

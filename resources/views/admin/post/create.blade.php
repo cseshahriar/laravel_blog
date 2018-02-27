@@ -115,8 +115,8 @@
 				  </div>
 				  <!-- /.box-header -->
 				  <div class="box-body pad {{ $errors->has('body') ? 'has-error' : '' }}">
-				      <textarea class="textarea" name="body" id="visualeditor" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('body') }}</textarea>
-				      <label class="text-danger">{{ $errors->first('body') }}</label>
+				      <textarea class="textarea" name="body" id="editor1" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('body') }}</textarea>
+				      <label class="text-danger">{{ $errors->first('body') }}</label> 
 				  </div>  
 				</div>
 				{{-- editor end  --}}
@@ -146,5 +146,14 @@
   $(document).ready(function () {
     $('.select2').select2();
   });
+</script>
+
+<!-- CK Editor -->
+<script src="{{ asset('admin/bower_components/ckeditor/ckeditor.js') }}"></script> 
+<script>
+  $(function () {
+    CKEDITOR.replace('editor1');
+    //$('.textarea').wysihtml5()
+  })
 </script>
 @endsection

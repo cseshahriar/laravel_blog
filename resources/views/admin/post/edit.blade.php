@@ -78,7 +78,13 @@
                     <label>Select Tag</label> 
                     <select name="tags[]" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true">
                       @foreach($tags as $tag)
-                          <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                          <option value="{{ $tag->id }}"
+                            @foreach($post->tags as  $postTag)
+                              @if($postTag->id == $tag->id)
+                                selected 
+                              @endif
+                            @endforeach
+                            >{{ $tag->name }}</option>
                       @endforeach 
                     </select>
                   </div>
@@ -89,7 +95,13 @@
                     <label>Select Category</label> 
                     <select name="categories[]" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true">
                       @foreach($categories as $category) 
-                          <option value="{{ $category->id }}">{{ $category->name }}</option>  
+                          <option value="{{ $category->id }}"
+                            @foreach($post->categories as $postCategory )
+                                @if($postCategory->id == $category->id)
+                                  selected 
+                                @endif
+                            @endforeach
+                            >{{ $category->name }}</option>  
                       @endforeach
                     </select>
                   </div>
@@ -118,9 +130,9 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body pad {{ $errors->has('body') ? 'has-error' : '' }}">
-                    <textarea class="textarea" name="body" id="visualeditor" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $post->body }}</textarea>
+                    <textarea class="textarea" name="body" id="editor1" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $post->body }}</textarea>
                     <label class="text-danger">{{ $errors->first('body') }}</label>
-                </div>  
+                </div>   
               </div>
               {{-- editor end  --}}
 
@@ -149,5 +161,14 @@
   $(document).ready(function () {
     $('.select2').select2();
   });
+</script>
+
+<!-- CK Editor -->
+<script src="{{ asset('admin/bower_components/ckeditor/ckeditor.js') }}"></script> 
+<script>
+  $(function () {
+    CKEDITOR.replace('editor1');
+    //$('.textarea').wysihtml5()
+  })
 </script>
 @endsection
