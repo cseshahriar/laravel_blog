@@ -3,3 +3,6 @@
 
 // model with migration 
 php artisan make:model Post -m  
+
+//relation
+every single post has many tags  
