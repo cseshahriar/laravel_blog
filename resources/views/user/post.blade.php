@@ -27,9 +27,11 @@
 
                 {{-- categories --}}
                 @foreach($post->Categories as $category) 
+                <a href="{{ url('post/category/'.$category->slug) }}">
                   <small class="pull-right" style="margin-right: 20px;border: 1px solid #ddd;padding: 5px;border-radius: 3px">
                       {{ $category->name }}
                   </small> 
+                </a>
                 @endforeach 
               {!! $post->body !!} 
               {{-- {!!  htmlspecialchars_decode($post->body) !!}  --}} 
@@ -37,9 +39,11 @@
               <h3>Tag Clouds</h3>
               {{-- tags clouds --}}   
               @foreach($post->tags as $tag)
+               <a href="{{ url('post/tag/'.$tag->slug) }}">
                   <small style="margin-right: 20px;border: 1px solid #ddd;padding: 5px;border-radius: 3px">
-                      {{ $tag->name }}    
+                     {{ $tag->name }}  
                   </small> 
+                </a>   
               @endforeach  
             
           </div> 

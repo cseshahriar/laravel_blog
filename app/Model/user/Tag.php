@@ -10,7 +10,12 @@ class Tag extends Model
     public function posts()
     {
     	//when need post from a tag 
-    	return $this->belongsToMany('App\Model\user\Post', 'Post_tags');   
+    	return $this->belongsToMany('App\Model\user\Post', 'Post_tags')->orderBy('created_at', 'DESC')->paginate(5);     
     	//every tag has many post
+    }
+
+     public function getRouteKeyName()
+    {
+    	return 'slug';
     }
 }
