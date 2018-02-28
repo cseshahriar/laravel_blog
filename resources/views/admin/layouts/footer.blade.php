@@ -42,6 +42,7 @@
 
 @section('extrajs')
 @show   
+
 <script type="text/javascript">
   $('#visualeditor').wysihtml5();  
 </script>
