@@ -1,5 +1,9 @@
 @extends('user.app')
 
+@section('extracss') 
+<link rel="stylesheet" href="{{ asset('user/css/prism.css') }}"> 
+@endsection
+
 @section('bg-img', asset('user/img/post-bg.jpg'))  {{-- banner img --}} 
 @section('banner-title', $post->title)  {{-- banner title --}}    
 @section('banner-subtitle', $post->subtitle)  {{-- banner subtitle --}}      
@@ -46,3 +50,7 @@
 
     <hr>
 @endsection  
+
+@section('extrajs') 
+<script src="{{ asset('user/js/prism.js') }}"></script>
+@endsection

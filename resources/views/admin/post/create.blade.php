@@ -149,7 +149,7 @@
 </script>
 
 <!-- CK Editor -->
-<script src="//cdn.ckeditor.com/4.8.0/full/ckeditor.js"></script> 
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script> 
 <script>
   $(function () {
     CKEDITOR.replace('editor1');
