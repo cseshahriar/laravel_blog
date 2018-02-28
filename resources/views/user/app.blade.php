@@ -5,7 +5,6 @@
   </head>
 
   <body>
-
    @include('user/layouts/header')  
 
    @section('main-content')  
