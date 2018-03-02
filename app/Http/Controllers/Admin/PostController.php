@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin; 
 
 use App\Http\Controllers\Controller;
 use App\Model\user\Post;
@@ -45,17 +45,26 @@ class PostController extends Controller
             'title'     => 'required',
             'subtitle'  => 'required',
             'slug'      => 'required',
-            //'image'      => 'required',
+            'image'      => 'required',
             //'status'      => 'required', 
             'body'      => 'required',
         ]);
 
         $post = new Post; 
-        $post->title = $request->title; 
+        $post->title    = $request->title; 
         $post->subtitle = $request->subtitle; 
-        $post->slug = $request->slug; 
-        $post->body = $request->body; 
-        $post->status = $request->status;  
+        $post->slug     = $request->slug; 
+        $post->body     = $request->body; 
+        $post->status   = $request->status;  
+
+        if($request->hasFile('image')) {
+            $imageName = $request->image->store('public/storage');  
+        }
+         //image name before public add problem
+        $imgName = explode('/', $imageName); 
+        $post->image = $imageName;    
+        $post->image = $imgName['1'];  
+
         $post->save();
 
         $post->tags()->sync($request->tags); 
@@ -105,17 +114,27 @@ class PostController extends Controller
             'title'     => 'required',
             'subtitle'  => 'required',
             'slug'      => 'required',
-            //'image'      => 'required',
+            'image'      => 'required',
             //'status'      => 'required', 
             'body'      => 'required',
         ]);
+
+        if($request->hasFile('image')) {
+            $imageName = $request->image->store('public');
+        }
 
         $post = Post::find($id);  
         $post->title = $request->title; 
         $post->subtitle = $request->subtitle; 
         $post->slug = $request->slug; 
         $post->body = $request->body; 
-        $post->status = $request->status;       
+        $post->status = $request->status;   
+
+        //image name before public add problem
+        $imgName = explode('/', $imageName); 
+        $post->image = $imageName;    
+        $post->image = $imgName['1'];
+
         $post->save();
 
         $post->tags()->sync($request->tags);

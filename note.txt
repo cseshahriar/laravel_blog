@@ -6,3 +6,6 @@ php artisan make:model Post -m
 
 //relation
 every single post has many tags  
+
+//storage link
+php artisan storage:link

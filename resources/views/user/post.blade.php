@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="{{ asset('user/css/prism.css') }}"> 
 @endsection
 
-@section('bg-img', asset('user/img/post-bg.jpg'))  {{-- banner img --}} 
+{{-- @section('bg-img', Storage::disk('local')->url($post->image))  --}} 
+@section('bg-img', asset("storage/$post->image"))    
 @section('banner-title', $post->title)  {{-- banner title --}}    
 @section('banner-subtitle', $post->subtitle)  {{-- banner subtitle --}}      
 
