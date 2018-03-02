@@ -1,6 +1,6 @@
 <?php 
 // User Routes
-Route::group(['namespace' => 'User'], function() {   
+Route::group(['namespace' => 'User'], function() {    
 	Route::get('/', 'HomeController@index');   
 	Route::get('post/{post}', 'PostController@post')->name('post');    
 	Route::get('post/tag/{tag}', 'HomeController@tag')->name('tag'); 
@@ -20,3 +20,7 @@ Route::group(['namespace' => 'Admin'], function() {
 	Route::resource('admin/category', 'CategoryController');   
 	
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

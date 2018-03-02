@@ -9,3 +9,11 @@ every single post has many tags
 
 //storage link
 php artisan storage:link
+
+
+// ===================== Authentication system ===============
+1. php artisan make:auth
+
+44 Auth::routes() -> Auth.php: -> 
+static::$app->make('router')->auth(); -> Router.php
+1007 public function auth() 
