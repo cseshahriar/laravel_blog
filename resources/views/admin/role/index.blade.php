@@ -1,5 +1,10 @@
 @extends('admin.layouts.app')
-@section('main-content')
+
+@section('extracss') 
+ <link rel="stylesheet" href="{{ asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"> 
+@endsection
+
+@section('main-content') 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -15,14 +20,13 @@
       </ol> 
     </section>
     <!-- Main content -->
-    <section class="content"> 
-      <!-- Default box -->
-      <div class="box">
+    <section class="content">
+       <div class="box">
                   <div class="box-header">
-                    <h3 class="box-title">Users
+                    <h3 class="box-title">Roles
                     </h3>
                     <span class="pull-right">
-                       <a href="{{ route('user.create') }}" class="btn btn-success pull-right">Add New</a>
+                       <a href="{{ route('role.create') }}" class="btn btn-success pull-right">Add New</a>
                     </span>
                   </div>
                   <!-- /.box-header -->
@@ -31,31 +35,30 @@
                       <thead>
                         <tr>
                             <th>S.No</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>Role Name</th>
                             <th>Edit</th>
-                            <th>Delete</th> 
+                            <th>Delete</th>
                         </tr>
                       </thead>
 
                       <tbody>
-                          @foreach($users as $user)
+                          @foreach($roles as $role)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td> 
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td> 
+                                <td>{{ $role->name }}</td>
+                                <td>{{ $role->slug }}</td>
                                 <td>
-                                  <a href="{{ route('user.edit', $user->id) }}" onclick="return confirm('Are you sure, Want to edit this?');">  
+                                  <a href="{{ route('role.edit', $role->id) }}" onclick="return confirm('Are you sure, Want to edit this?');">  
                                     <i class="fa fa-edit"></i></a> 
                                   </td>
                                 <td>
-                                  <form id="delete-form-{{ $user->id }}" action="{{ route('user.destroy', $user->id) }}" method="post" style="display: none;">  
+                                  <form id="delete-form-{{ $role->id }}" action="{{ route('role.destroy', $role->id) }}" method="post" style="display: none;">  
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                   </form>
                                   <a href="" onclick="if(confirm('Are you sure, Want to delete this?')) { 
                                       event.preventDefault(); 
-                                        document.getElementById('delete-form-{{ $user->id }}').submit();
+                                        document.getElementById('delete-form-{{ $role->id }}').submit();
                                        } else { 
                                           event.preventDefault();   
                                       }">
@@ -67,8 +70,7 @@
 
                           <tfoot>
                             <th>S.No</th>
-                            <th>Name</th>
-                            <th>Email</th> 
+                            <th>Role Name</th>
                             <th>Edit</th>
                             <th>Delete</th>
                           </tfoot>
@@ -77,9 +79,28 @@
                   </div>
                   <!-- /.box-body -->
         </div>
-      <!-- /.box -->
+        <!-- /.box -->
 		</section>
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 @endsection 
+
+@section('extrajs')
+<script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script> 
+<!-- page script -->
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+@endsection

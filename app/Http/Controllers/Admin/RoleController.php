@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\admin\Admin;
+use App\Model\admin\Role;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class RoleController extends Controller 
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = Admin::all();
-        return view('admin.user.index', compact('users')); 
-    } 
+        $roles = Role::all();
+        return view('admin.role.index', compact('roles')); 
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-         return view('admin.user.create');  
+        return view('admin.role.create'); 
     }
 
     /**
@@ -41,7 +37,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:50|unique:roles'
+        ]);
+
+        $role = new Role;
+        $role->name = $request->name;
+        $role->save();
+
+        return redirect(route('role.index'));
     }
 
     /**
@@ -52,7 +56,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-         return view('admin.tag.show'); 
+        //
     }
 
     /**
@@ -63,7 +67,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-         return view('admin.tag.edit'); 
+        //
     }
 
     /**
@@ -86,6 +90,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Role::where('id', $id)->delete();
+
+        return redirect()->back();   
     }
 }
