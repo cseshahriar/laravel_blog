@@ -17,3 +17,38 @@ php artisan storage:link
 44 Auth::routes() -> Auth.php: -> 
 static::$app->make('router')->auth(); -> Router.php
 1007 public function auth() 
+
+============================== admin auth system ================
+router.php 
+
+copy auth folder and past inside admin folder  
+
+// Admin Auth Routes 
+	Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login');  
+	Route::post('admin-login', 'Auth\LoginController@login'); //->name('admin.login')
+
+logincontroller -> use AuthenticatesUsers -> trait AuthenticatesUsers ->    
+/**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return view('admin.login');
+    }
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+        return $this->sendFailedLoginResponse($request);
+    }
