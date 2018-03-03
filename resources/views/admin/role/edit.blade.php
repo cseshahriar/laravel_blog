@@ -23,33 +23,33 @@
 		 <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Write an articel</h3>
+              <h3 class="box-title">Edit Role</h3>
             </div>
             <!-- /.box-header -->
-			
+			       <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                  @include('admin.layouts.messages')
+                </div>   
+             </div>
             <!-- form start -->
-            <form role="form" action="{{ route('tag.update', $tag->id) }}" method="post"> 
+            <!-- form start -->
+            <form role="form" action="{{ route('role.update', $role->id) }}" method="post"> 
               {{ csrf_field() }}
-              {{ method_field('PUT') }}
+              {{ method_field('PUT') }} 
               <div class="box-body">
-              	<div class="col-md-6 col-md-offset-3">
-	                <div class="form-group {{ $errors->has('name') ? 'has-error' : ''  }}">
-	                  <label for="name">Tag Title</label>
-	                  <input type="text" name="name" value="{{ $tag->name }}" class="form-control" id="name" placeholder="Enter tag name here">
-                    <label>{{ $errors->first('name') }}</label>
-	                </div> 
-	                <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}"> 
-	                  <label for="slug">Tag Slug</label>
-	                  <input type="text" name="slug" value="{{ $tag->slug }}" class="form-control" id="slug" placeholder="Enter article slug here">
-                    <label>{{ $errors->first('slug') }}</label>         
-	                </div>
+                <div class="col-md-6 col-md-offset-3">
+                  <div class="form-group {{ $errors->has('name') ? 'has-error' : ''  }}">
+                    <label for="name">Role Title</label>
+                    <input type="text" name="name" class="form-control" id="name" value="{{ $role->name }}" placeholder="Enter tag name here">
+                    <label>{{ $errors->first('name') }}</label> 
+                  </div> 
 
-		              <div class="form-group">
+                  <div class="form-group">
                     <button type="submit" class="btn btn-primary">Submit</button>
-		                <a href="{{ route('tag.index') }}" class="btn btn-warning">Back</a>
-		              </div>
-	                
-              	</div>
+                    <a href="{{ route('role.index') }}" class="btn btn-warning">Back</a> 
+                  </div>
+                  
+                </div>
               </div>
        
 

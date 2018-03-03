@@ -50,7 +50,7 @@
             </li>   
             <li class=""> 
                 <a href="{{ route('role.index') }}">      
-                    <i class="fa fa-users"></i> Roles
+                    <i class="fa fa-users"></i> Roles 
                 </a>
             </li> 
             <li class=""> 
