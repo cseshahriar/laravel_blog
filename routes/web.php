@@ -8,7 +8,7 @@ Route::group(['namespace' => 'User'], function() {
 });
 
 // Admin Routes 
-Route::group(['namespace' => 'Admin'], function() {
+Route::group(['namespace' => 'Admin'], function() { //'middleware' => 'auth:admin'  
 	Route::get('admin/home', 'HomeController@index')->name('admin.home');
 	// User Routes
 	Route::resource('admin/user', 'UserController');

@@ -212,6 +212,7 @@
             </li>
           </ul>
         </li>
+
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -248,8 +249,16 @@
               <div class="pull-left">
                 <a href="#" class="btn btn-default btn-flat">Profile</a>
               </div>
-              <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+              <div class="pull-right">  
+                {{-- admin top bar signout  --}}   
+                <a class="btn btn-default btn-flat" href="{{ route('admin.logout') }}" 
+                      onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+                      <i class="fa fa-sign-out"></i> Sign Out 
+                  </a>
+                  <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                  </form>
               </div>
             </li>
           </ul>

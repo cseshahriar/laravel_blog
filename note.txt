@@ -88,3 +88,16 @@ logincontroller -> use AuthenticatesUsers -> trait AuthenticatesUsers ->
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       {{ csrf_field() }}
                   </form>
+
+// middleware    
+
+app -> admin -> auth -> logincontroller -> 
+ public function __construct()
+    {
+        $this->middleware('guest::admin')->except('logout'); //guest::admin
+    }
+app -> http -> middleware ->redirectIfAuthenticate -> 
+
+
+// admin/home  redirect problem 
+Exception -> handler -> 
