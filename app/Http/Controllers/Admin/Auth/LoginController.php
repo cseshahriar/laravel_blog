@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;// put here
+use Illuminate\Http\Request;
+//use Illuminate\Auth\Middleware\Auth; // same under auth file 
 use Illuminate\Support\Facades\Auth; //put here
 
-class LoginController extends Controller
+class LoginController extends Controller 
 {
     /*
     |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'admin/home'; //
+    protected $redirectTo = 'admin/home';
 
     /**
      * Show the application's login form.
@@ -62,5 +63,15 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+     /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('admin'); 
     }
 }
