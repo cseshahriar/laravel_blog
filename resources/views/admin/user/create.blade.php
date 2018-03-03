@@ -53,14 +53,22 @@
 	                </div> 
 
 	                <div class="form-group">
-	                  <label for="role">Assign Role</label>
-	                  <select name="role" id="role" class="form-control" required>
-	                  	{{-- <option value="1">Admin</option> --}}
-	                  	<option value="2">Editor</option>
-	                  	<option value="3">Publisher</option>
-	                  	<option value="4">Writer</option>
-	                  </select>
-	                </div>
+                    <label>Assign Role</label>
+                    
+                    <div class="row">
+                      @foreach($roles as $role)
+                        <div class="col-md-4">
+                            <div class="checkbox">
+                               <label>
+                                  <input type="checkbox" name="role[]" value="{{ $role->id }}">{{ $role->name }}
+                              </label>  
+                            </div>
+                        </div>
+                      @endforeach
+                    </div>
+
+	                </div> 
+
               	</div>
 
               </div>
