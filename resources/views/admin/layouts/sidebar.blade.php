@@ -52,6 +52,11 @@
                 <a href="{{ route('role.index') }}">      
                     <i class="fa fa-users"></i> Roles 
                 </a>
+            </li>  
+            <li class=""> 
+                <a href="{{ route('permission.index') }}">        
+                    <i class="fa fa-shield"></i> Permissions
+                </a>
             </li> 
             <li class=""> 
                  <a class="nav-link" href="{{ route('admin.logout') }}" 

@@ -14,6 +14,8 @@ Route::group(['namespace' => 'Admin'], function() { //'middleware' => 'auth:admi
 	Route::resource('admin/user', 'UserController');
 	// Role Routes
 	Route::resource('admin/role', 'RoleController'); 
+	// Permission Routes
+	Route::resource('admin/permission', 'PermissionController');     
 	// Post Routes
 	Route::resource('admin/post', 'PostController');    
 	// Tag Routes

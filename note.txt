@@ -101,3 +101,7 @@ app -> http -> middleware ->redirectIfAuthenticate ->
 
 // admin/home  redirect problem 
 Exception -> handler -> 
+
+
+// permission 
+php artisan make:model Model/admin/Permission -m -r  
