@@ -28,6 +28,8 @@
                     <span class="pull-right">
                        <a href="{{ route('role.create') }}" class="btn btn-success pull-right">Add New</a>
                     </span>
+                     <br><br>
+                      @include('admin.layouts.messages') 
                   </div>
                   <!-- /.box-header -->
                   <div class="box-body">

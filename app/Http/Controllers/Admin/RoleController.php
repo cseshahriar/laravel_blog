@@ -47,7 +47,9 @@ class RoleController extends Controller
         $role->name = $request->name;
         $role->save();
 
-        return redirect(route('role.index'));
+        $role->permissions()->sync($request->permission);
+
+        return redirect(route('role.index'))->with('message', 'Role created successfully');
     }
 
     /**
@@ -69,8 +71,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+        $permissions = Permission::all();
         $role = Role::find($id);
-        return view('admin.role.edit', compact('role'));  
+        return view('admin.role.edit', compact('role', 'permissions'));  
     }
 
     /**
@@ -84,13 +87,16 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => "required|max:50|unique:roles,id,$id",
+
         ]);
 
         $role = Role::find($id);
         $role->name = $request->name; 
         $role->save();
 
-        return redirect(route('role.index')); 
+        $role->permissions()->sync($request->permission);
+
+        return redirect(route('role.index'))->with('message', 'Role updated successfully'); 
     }
 
     /**
@@ -103,6 +109,6 @@ class RoleController extends Controller
     {
         Role::where('id', $id)->delete();
 
-        return redirect()->back();   
+        return redirect()->back()->with('message', 'Role deleted successfully');   
     }
 }

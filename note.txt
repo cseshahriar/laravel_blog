@@ -105,3 +105,6 @@ Exception -> handler ->
 
 // permission 
 php artisan make:model Model/admin/Permission -m -r  
+
+
+// role and permission relation
