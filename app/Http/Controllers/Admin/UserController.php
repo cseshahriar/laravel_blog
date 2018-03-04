@@ -43,7 +43,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:admins',
+            'phone' => 'required|numeric',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+
+        $request['password'] = bcrypt($request->password);  
+        $admin = Admin::create($request->all()); 
+
+        $admin->role()->sync($request->role);   
+     
+        return redirect(route('user.index'))->with('message', 'User created successfully');
     }
 
     /**
@@ -79,7 +92,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'      => 'required|string|max:255',
+            'email'     => "required|string|email|max:255|unique:admins,id,$id", 
+            'phone'     => 'required|numeric',
+        ]);
+
+        //$user = Admin::where('id', $id)->update($request->except('_token', '_method'));  problem with status
+        $user = Admin::find($id); 
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->status = $request->status; 
+        $user->save();
+        return redirect(route('user.index'))->with('message', 'User updated successfully');     
     }
 
     /**
@@ -90,6 +116,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Admin::where('id', $id)->delete();
+
+        return redirect(route('user.index'))->with('message', 'User deleted successfully');
     }
 }

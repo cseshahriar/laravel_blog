@@ -23,7 +23,7 @@
 		 <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Add Admin</h3>
+              <h3 class="box-title">Edit Admin</h3>
             </div>
             <!-- /.box-header -->
 			
@@ -33,25 +33,48 @@
             	{{ method_field('PUT') }}
               <div class="box-body">
               	<div class="col-md-6">
-	                <div class="form-group">
+	                <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 	                  <label for="name">Name</label>
-	                  <input type="text" name="name" class="form-control" id="name" value="{{ $user->name }}" placeholder="Enter name here">
+	                  <input type="text" name="name" class="form-control" id="name" value="@if(old('name')) {{ old('name') }} @else {{ $user->name}} @endif" placeholder="Enter name here">
+                     <label>{{ $errors->first('name') }}</label>
 	                </div> 
 
-	                <div class="form-group">
+	                <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}"> 
 	                  <label for="email">Email</label>
-	                  <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}" placeholder="Enter email here">
+	                  <input type="email" name="email" class="form-control" id="email" value="@if(old('email')) {{ old('email') }} @else {{ $user->email }} @endif" placeholder="Enter email here">
+                     <label>{{ $errors->first('email') }}</label>
 	                </div>  
 
-	                <div class="form-group">
-	                  <label for="password">Password</label>
-	                  <input type="password" name="password" class="form-control" id="password" placeholder="Enter password here">
-	                </div>  
+                   <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
+                    <label for="phone">phone</label>
+                    <input type="text" name="phone" class="form-control" id="phone" value="@if(old('phone')) {{ old('phone') }} @else {{ $user->phone }} @endif" placeholder="Enter phone here">
+                    <label>{{ $errors->first('phone') }}</label> 
+                     <label>{{ $errors->first('phone') }}</label>
+                  </div> 
 
-	                <div class="form-group">
-	                  <label for="password-confirm">Confirm Password</label>
-	                  <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-	                </div> 
+                   
+
+                  <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}"> 
+                    <label for="status">Status</label>
+                     <div class="checkbox"> 
+                         <label>
+                            <input type="checkbox" name="status" id="status"  value="@if(old('status')==1 || ($user->status == 1)){{ '1' }} @endif" @if(old('status')==1 || ($user->status == 1)) {{ 'checked' }} @endif> Status 
+                        </label>   
+                        <button onclick="check()" type="button" class="btn btn-success btn-xs">Check Checkbox</button>
+                        <button onclick="uncheck()" type="button" class="btn btn-danger btn-xs">Uncheck Checkbox</button>
+                         <script>
+                            function check() {
+                                document.getElementById("status").checked = true;
+                                document.getElementById("status").value = '1'; 
+                            }
+
+                            function uncheck() {
+                                document.getElementById("status").value = '0';
+                                document.getElementById("status").checked = false;
+                            }
+                         </script>
+                      </div>
+                  </div>
 
 	                <div class="form-group">
                     <label>Assign Role</label>
@@ -91,3 +114,4 @@
   </div>
   <!-- /.content-wrapper -->
 @endsection
+
