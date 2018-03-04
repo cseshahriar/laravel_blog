@@ -38,6 +38,7 @@
                         <tr>
                             <th>S.No</th>
                             <th>Permission Name</th>
+                            <th>Permission For</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -47,8 +48,8 @@
                           @foreach($permissions as $permission)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td> 
-                                <td>{{ $permission->name }}</td>
-                                <td>{{ $permission->slug }}</td>
+                                <td>{{ $permission->name }}</td> 
+                                <td>{{ $permission->for }}</td>
                                 <td>
                                   <a href="{{ route('permission.edit', $permission->id) }}" onclick="return confirm('Are you sure, Want to edit this?');">  
                                     <i class="fa fa-edit"></i></a> 
@@ -73,6 +74,7 @@
                           <tfoot>
                             <th>S.No</th>
                             <th>Permission Name</th>
+                            <th>Permission For</th>
                             <th>Edit</th>
                             <th>Delete</th>
                           </tfoot>

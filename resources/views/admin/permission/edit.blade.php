@@ -39,11 +39,18 @@
               {{ method_field('PUT') }}
               <div class="box-body">
                 <div class="col-md-6 col-md-offset-3">
+
                   <div class="form-group {{ $errors->has('name') ? 'has-error' : ''  }}">
                     <label for="name">Permission Title</label>
                     <input type="text" name="name" class="form-control" id="name" value="{{ $permission->name }}" placeholder="Enter tag name here">
                     <label>{{ $errors->first('name') }}</label> 
                   </div> 
+
+                    <div class="form-group {{ $errors->has('name') ? 'has-error' : ''  }}">
+                    <label for="for">Permission For</label>
+                      <input type="text" name="for" value="{{ $permission->for }}" class="form-control">
+                    <label>{{ $errors->first('for') }}</label>  
+                  </div>
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary">Submit</button>

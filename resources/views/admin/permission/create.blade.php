@@ -38,10 +38,21 @@
               {{ csrf_field() }}
               <div class="box-body">
               	<div class="col-md-6 col-md-offset-3">
-	                <div class="form-group {{ $errors->has('name') ? 'has-error' : ''  }}">
-	                  <label for="name">Permission Title</label>
-	                  <input type="text" name="name" class="form-control" id="name" placeholder="Enter tag name here">
+                  <div class="form-group {{ $errors->has('name') ? 'has-error' : ''  }}">
+                    <label for="name">Permission Title</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter tag name here">
                     <label>{{ $errors->first('name') }}</label> 
+                  </div> 
+
+	                <div class="form-group {{ $errors->has('name') ? 'has-error' : ''  }}">
+	                  <label for="for">Permission For</label>
+	                  <select name="for" id="for" class="form-control">
+                      <option selected disabled>Select Permission For</option>  
+                      <option value="user">User</option> 
+                      <option value="other">other</option> 
+                      <option value="post">post</option> 
+                    </select>
+                    <label>{{ $errors->first('for') }}</label>  
 	                </div> 
 
 		              <div class="form-group">

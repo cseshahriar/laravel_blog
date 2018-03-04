@@ -4,7 +4,7 @@
   <div class="content-wrapper">
 
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header"> 
       <h1>
         Text Editors
         <small>Advanced form element</small>
@@ -38,11 +38,50 @@
               {{ csrf_field() }}
               <div class="box-body">
               	<div class="col-md-6 col-md-offset-3">
+
 	                <div class="form-group {{ $errors->has('name') ? 'has-error' : ''  }}">
 	                  <label for="name">Role Title</label>
 	                  <input type="text" name="name" class="form-control" id="name" placeholder="Enter tag name here">
                     <label>{{ $errors->first('name') }}</label>
 	                </div> 
+
+                  <div class="col-md-6">
+                      <label for="name">Posts Permissions</label>
+                      <div class="checkbox">
+                        <label><input type="checkbox">Create</label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label><input type="checkbox">Create</label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label><input type="checkbox">Create</label>
+                      </div> 
+
+                      <div class="checkbox">
+                        <label><input type="checkbox">Create</label>
+                      </div>
+                  </div>
+                    
+                    <div class="col-md-6">
+                        <label for="name">User Permissions</label>
+                          <div class="checkbox">
+                        <label><input type="checkbox">Create</label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label><input type="checkbox">Create</label>
+                      </div>
+
+                      <div class="checkbox">
+                        <label><input type="checkbox">Create</label> 
+                      </div> 
+
+                      <div class="checkbox">
+                        <label><input type="checkbox">Create</label>
+                      </div>
+                    </div>  
 
 		              <div class="form-group">
                     <button type="submit" class="btn btn-primary">Submit</button>
