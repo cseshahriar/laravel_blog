@@ -15,6 +15,13 @@ class Admin extends Authenticatable
         return $this->belongsToMany('App\Model\admin\Role');
     }
 
+
+    //accessor (effect from database) 
+    public function getNameAttribute($value) 
+    {
+        return ucfirst($value);  
+    }
+
     /**
      * The attributes that are mass assignable.
      *
