@@ -6,8 +6,15 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable
-{
+{ 
     use Notifiable;  
+
+    //every admin user has many roles  
+    public function roles()
+    {
+        return $this->belongsToMany('App\Model\admin\Role');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

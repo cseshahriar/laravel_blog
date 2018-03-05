@@ -84,7 +84,13 @@
                         <div class="col-md-4">
                             <div class="checkbox">
                                <label>
-                                  <input type="checkbox" name="role[]" value="{{ $role->id }}">{{ $role->name }}
+                                  <input type="checkbox" name="role[]" value="{{ $role->id }}"
+                                    @foreach($user->roles as $user_role)
+                                      @if($user_role->id == $role->id) 
+                                            {{ 'checked' }}
+                                      @endif
+                                    @endforeach
+                                   />{{ $role->name }}
                               </label>  
                             </div>
                         </div>

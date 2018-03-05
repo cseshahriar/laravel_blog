@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller; 
 use App\Model\admin\Admin;
 use App\Model\admin\Role;
 use Illuminate\Http\Request;
@@ -54,7 +54,7 @@ class UserController extends Controller
         $request['password'] = bcrypt($request->password);  
         $admin = Admin::create($request->all()); 
 
-        $admin->role()->sync($request->role);   
+        $admin->roles()->sync($request->role);     
      
         return redirect(route('user.index'))->with('message', 'User created successfully');
     }
@@ -98,13 +98,16 @@ class UserController extends Controller
             'phone'     => 'required|numeric',
         ]);
 
-        //$user = Admin::where('id', $id)->update($request->except('_token', '_method'));  problem with status
-        $user = Admin::find($id); 
+        //$user = Admin::where('id', $id)->update($request->except('_token', '_method', 'role'));  //problem with status
+         $user = Admin::find($id); 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->status = $request->status; 
-        $user->save();
+        $user->save(); 
+
+        $user->roles()->sync($request->role);   
+
         return redirect(route('user.index'))->with('message', 'User updated successfully');     
     }
 
