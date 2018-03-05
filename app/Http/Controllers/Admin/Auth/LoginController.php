@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Model\admin\Admin;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-//use Illuminate\Auth\Middleware\Auth; // same under auth file 
 use Illuminate\Support\Facades\Auth; //put here
 
 class LoginController extends Controller 
@@ -63,6 +63,26 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest:admin')->except('logout');
+    }
+
+    /**
+     * Get the needed authorization credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        $admin = Admin::where('email', $request->email)->first();
+        if(count($admin)) {
+            if($admin->status == 0) {
+                return ['email' => 'inactive', 'password' => 'You are not an active person, please contact Admin'];
+            } else {
+                return ['email' => $request->email, 'password' => $request->password, 'status' => 1 ];
+            } 
+        }
+
+        return ['email' => $request->email, 'password' => $request->password, 'status' => 1 ];
     }
 
      /**

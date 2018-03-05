@@ -32,6 +32,7 @@
                             <th>S.No</th>
                             <th>Name</th>
                             <th>Assigned Roles</th>
+                            <th>Status</th>
                             <th>Email</th>
                             <th>Edit</th>
                             <th>Delete</th> 
@@ -47,6 +48,11 @@
                                   @foreach($user->roles as $role)
                                     {{ $role->name }},
                                   @endforeach
+                                </td> 
+                                <td>
+                                  <span class="{{ $user->status ? 'text-success bg-success center-block': 'center-block text-danger bg-danger' }}">
+                                    {{ $user->status ? 'Active' : 'Deactive' }} 
+                                  </span>
                                 </td> 
                                 <td>{{ $user->email }}</td> 
                                 <td>
@@ -74,6 +80,7 @@
                             <th>S.No</th> 
                             <th>Name</th>
                             <th>Assigned Roles</th>
+                            <th>Status</th>
                             <th>Email</th> 
                             <th>Edit</th>
                             <th>Delete</th>

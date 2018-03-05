@@ -111,3 +111,43 @@ php artisan make:model Model/admin/Permission -m -r
 
 
 // admin_role not admin_roles
+
+
+// status 0 login message 
+  login controller :
+ /**
+     * Get the needed authorization credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        $admin = Admin::where('email' $request->email)->first();
+        if($admin->status == 0) {
+            return ['email' => $request->email, 'password' => 'You are not an active person, please contact Admin'];
+        } else {
+            return ['email' => 'inactive', 'password' => $request->password, 'status' => 1 ];
+        }
+    }
+
+
+    AuthernticatesUser.php
+     protected function sendFailedLoginResponse(Request $request)
+    {
+        
+        $fields = $this->credeintials($request); // login message custom 
+        if($fields['eemail'] == 'inactive') {
+            $errors->$fields->password; 
+        } else {
+            $errors = [$this->username() => trans('auth.failed')];
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
+
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors($errors);
+    }
