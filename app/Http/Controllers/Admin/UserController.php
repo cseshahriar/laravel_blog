@@ -98,15 +98,19 @@ class UserController extends Controller
             'phone'     => 'required|numeric',
         ]);
 
-        //$user = Admin::where('id', $id)->update($request->except('_token', '_method', 'role'));  //problem with status
-         $user = Admin::find($id); 
+        $user = Admin::where('id', $id)->update($request->except('_token', '_method', 'role'));  //problem with status
+        
+        Admin::find($id)->roles()->sync($request->role);      
+        
+        //long waya
+        /* $user = Admin::find($id); 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->status = $request->status; 
         $user->save(); 
+        $user->roles()->sync($request->role);    */
 
-        $user->roles()->sync($request->role);   
 
         return redirect(route('user.index'))->with('message', 'User updated successfully');     
     }

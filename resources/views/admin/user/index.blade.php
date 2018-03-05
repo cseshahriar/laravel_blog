@@ -34,6 +34,7 @@
                         <tr>
                             <th>S.No</th>
                             <th>Name</th>
+                            <th>Assigned Roles</th>
                             <th>Email</th>
                             <th>Edit</th>
                             <th>Delete</th> 
@@ -45,6 +46,11 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td> 
                                 <td>{{ $user->name }}</td>
+                                <td>
+                                  @foreach($user->roles as $role)
+                                    {{ $role->name }},
+                                  @endforeach
+                                </td> 
                                 <td>{{ $user->email }}</td> 
                                 <td>
                                   <a href="{{ route('user.edit', $user->id) }}" onclick="return confirm('Are you sure, Want to edit this?');">  
@@ -68,8 +74,9 @@
                           @endforeach
 
                           <tfoot>
-                            <th>S.No</th>
+                            <th>S.No</th> 
                             <th>Name</th>
+                            <th>Assigned Roles</th>
                             <th>Email</th> 
                             <th>Edit</th>
                             <th>Delete</th>
