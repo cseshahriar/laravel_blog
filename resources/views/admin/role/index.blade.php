@@ -45,7 +45,6 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td> 
                                 <td>{{ $role->name }}</td>
-                                <td>{{ $role->slug }}</td>
                                 <td>
                                   <a href="{{ route('role.edit', $role->id) }}" onclick="return confirm('Are you sure, Want to edit this?');">  
                                     <i class="fa fa-edit"></i></a> 

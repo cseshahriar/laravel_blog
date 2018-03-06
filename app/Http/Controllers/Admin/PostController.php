@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin; 
 
 use App\Http\Controllers\Controller;
+use App\Model\user\Category;
 use App\Model\user\Post;
 use App\Model\user\Tag;
-use App\Model\user\Category; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -32,9 +33,14 @@ class PostController extends Controller
      */
     public function create()
     {
-        $tags = Tag::all();
-        $categories = Category::all(); 
-        return view('admin.post.create', compact('tags', 'categories'));        
+        //restriction 
+        if (Auth::user()->can('post.create')) {
+            $tags = Tag::all();
+            $categories = Category::all(); 
+            return view('admin.post.create', compact('tags', 'categories'));        
+        }
+
+        return redirect(route('admin.home'));
     }
 
     /**
@@ -95,13 +101,17 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::with('tags', 'categories')->find($id); 
+        if (Auth::user()->can('post.update')) {
+            $post = Post::with('tags', 'categories')->find($id); 
 
-        $tags = Tag::all();
-        $categories = Category::all(); 
+            $tags = Tag::all();
+            $categories = Category::all(); 
 
-        //$post = Post::where('id',$id)->first(); 
-        return view('admin.post.edit', compact('tags','categories','post'));  
+            //$post = Post::where('id',$id)->first(); 
+            return view('admin.post.edit', compact('tags','categories','post'));  
+        }
+
+        return redirect(route('admin.home'));
     }
 
     /**

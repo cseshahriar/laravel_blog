@@ -33,16 +33,23 @@
                     <i class="fa fa-file"></i> Posts
                 </a>
             </li> 
+            
+            @can('posts.category', Auth::user())
             <li class="">
                 <a href="{{ route('category.index') }}">
                     <i class="fa fa-list"></i> Categories 
                 </a>
             </li>
+            @endcan
+
+            @can('posts.tag', Auth::user())
             <li class=""> 
                 <a href="{{ route('tag.index') }}"> 
                     <i class="fa fa-list"></i> Tags
                 </a>
             </li> 
+            @endcan
+
             <li class=""> 
                 <a href="{{ route('user.index') }}">      
                     <i class="fa fa-users"></i> Users

@@ -24,7 +24,13 @@
                     <h3 class="box-title">Tags
                     </h3>
                     <span class="pull-right">
-                       <a href="{{ route('post.create') }}" class="btn btn-success pull-right">Add New</a> 
+
+                      {{-- access limit --}} 
+                      @can('posts.create', Auth::user()) {{-- posts is policy name, create is policy methods --}}
+                        <a href="{{ route('post.create') }}" class="btn btn-success pull-right">Add New</a> 
+                      @endcan
+
+              
                     </span>
                   </div>
                   <!-- /.box-header -->
@@ -37,8 +43,12 @@
                             <th>Sub Title</th>
                             <th>Slug</th>
                             <th>Created At</th>
+                            @can('posts.update', Auth::user())
                             <th>Edit</th>
+                            @endcan
+                            @can('posts.delete', Auth::user())
                             <th>Delete</th>
+                             @endcan
                         </tr>
                       </thead>
 
@@ -50,10 +60,15 @@
                                 <td>{{ $post->subtitle}}</td>
                                 <td>{{ $post->slug }}</td>
                                 <td>{{ $post->created_at->format('d-m-Y') }}</td>
+                                @can('posts.update', Auth::user())
                                 <td>
+
                                   <a href="{{ route('post.edit', $post->id) }}" onclick="return confirm('Are you sure, Want to edit this?');">  
-                                    <i class="fa fa-edit"></i></a> 
+                                    <i class="fa fa-edit"></i>
+                                  </a> 
                                   </td>
+                                  @endcan
+                                @can('posts.delete', Auth::user())
                                 <td>
                                   <form id="delete-form-{{ $post->id }}" action="{{ route('post.destroy', $post->id) }}" method="post" style="display: none;">  
                                     {{ csrf_field() }}
@@ -68,6 +83,7 @@
                                     <i class="fa fa-trash"></i> 
                                   </a>
                                 </td>
+                                @endcan 
                             </tr>
                           @endforeach
 
@@ -77,8 +93,12 @@
                             <th>Sub Title</th>
                             <th>Slug</th>
                             <th>Created At</th>
+                            @can('posts.update', Auth::user())
                             <th>Edit</th>
+                            @endcan
+                            @can('posts.delete', Auth::user())
                             <th>Delete</th>
+                            @endcan 
                           </tfoot>
                       
                     </table>

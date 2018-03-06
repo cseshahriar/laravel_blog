@@ -151,3 +151,13 @@ php artisan make:model Model/admin/Permission -m -r
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors($errors);
     }
+
+
+    //gates 
+
+    app -> providers -> authservices providers 
+
+  inside boot mehod 
+  // custom gate
+        Gate::resource('posts', 'PostPolicy'); 
+    php artisan make:policy PostPolicy --model=Post
