@@ -161,3 +161,10 @@ php artisan make:model Model/admin/Permission -m -r
   // custom gate
         Gate::resource('posts', 'PostPolicy'); 
     php artisan make:policy PostPolicy --model=Post
+
+
+    // vue js compile
+    npm install
+    npm run watch  
+
+    //like and dislike not complete

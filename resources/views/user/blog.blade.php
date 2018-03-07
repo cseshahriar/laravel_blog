@@ -1,6 +1,16 @@
 @extends('user.app')
+
 @section('extracss') 
 <link rel="stylesheet" href="{{ asset('user/css/prism.css') }}"> 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<style>
+  .fa-thumbs-o-up:hover {
+      color: red;
+  }
+  .post-meta  a {
+      text-decoration: none;
+  }
+</style>
 @endsection
 
 @section('bg-img', asset('user/img/home-bg.jpg'))  {{-- banner img --}}    
@@ -10,22 +20,26 @@
 @section('main-content') 
 <!-- Main Content -->
     <div class="container"> 
-      <div class="row">
+      <div class="row" id="app"> {{-- app for vue --}}
         <div class="col-lg-8 col-md-10 mx-auto"> 
           @foreach($posts as $post) 
+
           <div class="post-preview">
             <a href="{{ url('post', $post->slug) }}">  {{-- route('post') --}} 
-              <h2 class="post-title">  
-                  {{ $post->title }}
-              </h2>
-              <h3 class="post-subtitle">
-                  {{ $post->subtitle }}   
-              </h3>
+                <h2 class="post-title">  
+                    {{ $post->title }}
+                </h2>
+                <h3 class="post-subtitle">
+                    {{ $post->subtitle }}   
+                </h3>
             </a>
             <p class="post-meta">Posted by
               <a href="#">Start Bootstrap</a>
-              on {{ $post->created_at->diffForHumans() }}</p>      
+              on {{ $post->created_at->diffForHumans() }}
+              &nbsp;&nbsp; 
+            </p>      
           </div>
+
           @endforeach  
           <hr>  
           
@@ -84,4 +98,5 @@
 
 @section('extrajs') 
 <script src="{{ asset('user/js/prism.js') }}"></script> 
+<script src="{{ asset('js/app.js') }}"></script> 
 @endsection 
