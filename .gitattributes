@@ -1,3 +1,2 @@
-* text=auto
-*.php linguist-language=php
+* linguist-language=php
 CHANGELOG.md export-ignore
